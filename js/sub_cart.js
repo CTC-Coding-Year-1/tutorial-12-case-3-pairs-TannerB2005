@@ -25,21 +25,32 @@
 window.addEventListener("load", setupCart);
 
 function setupCart() {
-   var addButton = document.getElementsByClassName("addButtons");
-   addEventHandler.createElement
+   var addButtons = document.getElementsByClassName("addButton");
 
-   for (var i = 0; i < addButton.length; i++) {
-      addEventListener("click", addItem)
+   for (var i = 0; i < addButtons.length; i++) {
+      addButtons[i].onclick=addItem;
    }
 }
 
-function addItem() {
-   let node = document.getElementById("foodItem");
-   var foodID = getElementById(foodItem);
-   cloneNode() = "foodItem";
-   var cartBox = cartBox.getElementById;
-   var duplicateOrder = false;
-   for (var i = foodItem; i < cartBox.length; i++);
+function addItem(e) {
+   var foodItem = e.target.nextElementSibling;
+   var foodID = foodItem.getAttribute("id");
+   var foodDescription = foodItem.cloneNode(true);
 
-   if (i = foodID + 1)
+   var cartBox = document.getElementById("cart");
+
+   var duplicateOrder = false;
+   for (var n = cartBox.firstElementChild; n = n.nextElementSibling; n !== null){
+      if(n.id === foodID) {
+         duplicateOrder=true;
+         n.firstElementChild.textContent++;
+         break;
+      }
+   }
+   if (duplicateOrder===false){
+      var orderCount=document.createElement("span");
+      orderCount.textContent="1";
+      foodDescription.insertBefore(orderCount, foodDescription.firstChild);
+      cartBox.appendChild(foodDescription);
+   }
 }
